@@ -5,3 +5,6 @@ node_modules/
 
 # iconos de UI descargados de Instagram (no son assets de marca)
 img/download*.svg
+
+# symlink local a node_modules (instalar con npm i)
+preview/node_modules
