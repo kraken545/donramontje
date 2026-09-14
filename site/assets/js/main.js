@@ -156,7 +156,7 @@
   });
 
   /* ---------- ubicación / horarios ---------- */
-  function compactHours() {
+  function compactHours(includeClosed) {
     var l = body.dataset.lang;
     var parts = [];
     var open = D.hours.filter(function (h) { return h.time; });
@@ -167,6 +167,13 @@
       var range = open[i].dayShort[l] + (j > i ? '\u2013' + open[j].dayShort[l] : '');
       parts.push(range + ' ' + open[i].time);
       i = j + 1;
+    }
+    if (includeClosed) {
+      var closed = [];
+      D.hours.forEach(function (h) { if (!h.time) closed.push(h.dayShort[l]); });
+      if (closed.length) {
+        parts.push(closed.join(', ') + ' ' + (D.i18n[l] || D.i18n.en).closed);
+      }
     }
     return parts.join(' \u00B7 ');
   }
@@ -193,24 +200,30 @@
       hoursList.appendChild(li);
     });
 
-    var mapFrame = document.getElementById('mapFrame');
+    var mapWrap = document.getElementById('locationMap');
+    var oldMap = mapWrap.querySelector('.map-frame, iframe.map-embed');
+    if (oldMap) oldMap.remove();
     if (D.location.mapsEmbed) {
-      mapFrame.innerHTML = '<iframe src="' + D.location.mapsEmbed + '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Don Ramon Jetfuel location map" allowfullscreen></iframe>';
+      var frame = document.createElement('iframe');
+      frame.className = 'map-embed';
+      frame.src = D.location.mapsEmbed;
+      frame.loading = 'lazy';
+      frame.referrerPolicy = 'no-referrer-when-downgrade';
+      frame.title = 'Don Ramon Jetfuel location map';
+      frame.allowFullscreen = true;
+      mapWrap.insertBefore(frame, mapWrap.firstChild);
     } else {
-      mapFrame.innerHTML = '<div class="map-placeholder"><span class="pin">&#128205;</span><p>' + dict['loc.hours'] + '</p></div>';
+      var ph = document.createElement('div');
+      ph.className = 'map-frame';
+      ph.innerHTML = '<div class="map-placeholder"><span class="pin">&#128205;</span><p>' + dict['loc.hours'] + '</p></div>';
+      mapWrap.insertBefore(ph, mapWrap.firstChild);
     }
     document.getElementById('mapDirections').href = D.location.mapsLink;
     document.getElementById('heroHoursText').textContent = compactHours();
   }
 
   function renderFooter() {
-    var dict = D.i18n[body.dataset.lang] || D.i18n.en;
-    var lines = D.hours
-      .filter(function (h) { return h.time; })
-      .map(function (h) { return (h.day[body.dataset.lang] || h.day.en) + ': ' + h.time; });
-    document.getElementById('footerHours').innerHTML = lines.length
-      ? lines.join('<br>')
-      : dict['loc.hours'] + ': —';
+    document.getElementById('footerHours').textContent = compactHours(true);
   }
 
   /* ---------- galería + lightbox ---------- */
