@@ -27,20 +27,20 @@ window.DR_DATA = {
   },
 
   location: {
-    address: { en: "Curaçao — exact location coming soon. Check Instagram for today's spot!", es: "Curaçao — ubicación exacta pronto. ¡Mira Instagram para el punto de hoy!" },
-    mapsEmbed: "", /* URL embed de Google Maps (share > Embed a map > copiar src) — PENDIENTE */
-    mapsLink: "https://maps.google.com/?q=Curaçao" /* link "cómo llegar" — PENDIENTE */
+    address: { en: "Truk'i Pan, Willemstad, Curaçao", es: "Truk'i Pan, Willemstad, Curaçao" },
+    mapsEmbed: "https://maps.google.com/maps?q=12.104231,-68.929434&z=17&output=embed",
+    mapsLink: "https://maps.app.goo.gl/ApyZSNQyvTET6xGn6"
   },
 
   hours: [
     { day: { en: "Monday",   es: "Lunes" },    time: "" },
-    { day: { en: "Tuesday",  es: "Martes" },   time: "" },
-    { day: { en: "Wednesday", es: "Miércoles" }, time: "" },
-    { day: { en: "Thursday", es: "Jueves" },   time: "" },
-    { day: { en: "Friday",   es: "Viernes" },  time: "" },
-    { day: { en: "Saturday", es: "Sábado" },   time: "" },
+    { day: { en: "Tuesday",  es: "Martes" },   time: "9:00 PM – 3:00 AM" },
+    { day: { en: "Wednesday", es: "Miércoles" }, time: "9:00 PM – 3:00 AM" },
+    { day: { en: "Thursday", es: "Jueves" },   time: "9:00 PM – 4:00 AM" },
+    { day: { en: "Friday",   es: "Viernes" },  time: "9:00 PM – 4:00 AM" },
+    { day: { en: "Saturday", es: "Sábado" },   time: "9:00 PM – 4:00 AM" },
     { day: { en: "Sunday",   es: "Domingo" },  time: "" }
-  ], /* PENDIENTE: horarios reales, formato "5:00 PM – 11:00 PM" */
+  ],
 
   heroImage: "assets/img/food/food-06-hero.webp",
   heroAlt: "Grilled food with fries from Don Ramon Jetfuel",
