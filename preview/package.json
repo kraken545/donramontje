@@ -1,0 +1,13 @@
+{
+  "name": "donramontje-preview",
+  "private": true,
+  "description": "Herramientas de test local para la web de Don Ramon Jetfuel (requieren el preview corriendo en :8080)",
+  "scripts": {
+    "check:responsive": "node scripts/check-responsive.js",
+    "check:interactions": "node scripts/check-interactions.js",
+    "check": "npm run check:responsive && npm run check:interactions"
+  },
+  "dependencies": {
+    "playwright-core": "^1.55.0"
+  }
+}
