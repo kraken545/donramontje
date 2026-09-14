@@ -33,13 +33,13 @@ window.DR_DATA = {
   },
 
   hours: [
-    { day: { en: "Monday",   es: "Lunes" },    time: "" },
-    { day: { en: "Tuesday",  es: "Martes" },   time: "9:00 PM – 3:00 AM" },
-    { day: { en: "Wednesday", es: "Miércoles" }, time: "9:00 PM – 3:00 AM" },
-    { day: { en: "Thursday", es: "Jueves" },   time: "9:00 PM – 4:00 AM" },
-    { day: { en: "Friday",   es: "Viernes" },  time: "9:00 PM – 4:00 AM" },
-    { day: { en: "Saturday", es: "Sábado" },   time: "9:00 PM – 4:00 AM" },
-    { day: { en: "Sunday",   es: "Domingo" },  time: "" }
+    { day: { en: "Monday",   es: "Lunes" },    dayShort: { en: "Mon", es: "Lun" }, time: "" },
+    { day: { en: "Tuesday",  es: "Martes" },   dayShort: { en: "Tue", es: "Mar" }, time: "9:00 PM – 3:00 AM" },
+    { day: { en: "Wednesday", es: "Miércoles" }, dayShort: { en: "Wed", es: "Mié" }, time: "9:00 PM – 3:00 AM" },
+    { day: { en: "Thursday", es: "Jueves" },   dayShort: { en: "Thu", es: "Jue" }, time: "9:00 PM – 4:00 AM" },
+    { day: { en: "Friday",   es: "Viernes" },  dayShort: { en: "Fri", es: "Vie" }, time: "9:00 PM – 4:00 AM" },
+    { day: { en: "Saturday", es: "Sábado" },   dayShort: { en: "Sat", es: "Sáb" }, time: "9:00 PM – 4:00 AM" },
+    { day: { en: "Sunday",   es: "Domingo" },  dayShort: { en: "Sun", es: "Dom" }, time: "" }
   ],
 
   heroImage: "assets/img/food/food-06-hero.webp",

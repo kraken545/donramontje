@@ -156,15 +156,32 @@
   });
 
   /* ---------- ubicación / horarios ---------- */
+  function compactHours() {
+    var l = body.dataset.lang;
+    var parts = [];
+    var open = D.hours.filter(function (h) { return h.time; });
+    var i = 0;
+    while (i < open.length) {
+      var j = i;
+      while (j + 1 < open.length && open[j + 1].time === open[i].time) j++;
+      var range = open[i].dayShort[l] + (j > i ? '\u2013' + open[j].dayShort[l] : '');
+      parts.push(range + ' ' + open[i].time);
+      i = j + 1;
+    }
+    return parts.join(' \u00B7 ');
+  }
+
   function renderLocation() {
     var dict = D.i18n[body.dataset.lang] || D.i18n.en;
     var addr = document.getElementById('locationAddress');
     addr.textContent = D.location.address[body.dataset.lang] || D.location.address.en;
 
+    var today = (new Date().getDay() + 6) % 7; // 0 = lunes ... 6 = domingo
     var hoursList = document.getElementById('hoursList');
     hoursList.innerHTML = '';
-    D.hours.forEach(function (h) {
+    D.hours.forEach(function (h, i) {
       var li = document.createElement('li');
+      if (i === today) li.className = 'is-today';
       var day = document.createElement('span');
       day.className = 'h-day';
       day.textContent = h.day[body.dataset.lang] || h.day.en;
@@ -183,6 +200,7 @@
       mapFrame.innerHTML = '<div class="map-placeholder"><span class="pin">&#128205;</span><p>' + dict['loc.hours'] + '</p></div>';
     }
     document.getElementById('mapDirections').href = D.location.mapsLink;
+    document.getElementById('heroHoursText').textContent = compactHours();
   }
 
   function renderFooter() {

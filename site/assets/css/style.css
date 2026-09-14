@@ -216,6 +216,19 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
 
+.hero-hours {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 24px;
+  font-family: var(--font-display);
+  font-size: 1rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--cream);
+  background: rgba(255,200,0,.08);
+  border: 1px solid rgba(255,200,0,.28);
+  border-radius: 6px;
+  padding: .6em 1em;
+}
+.hero-hours span[aria-hidden] { color: var(--yellow); }
+
 .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
 .badge {
   display: inline-block; padding: .35em .9em .25em;
@@ -510,7 +523,18 @@ section[id] { scroll-margin-top: 76px; }
   padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px;
   font-weight: 600;
 }
+.hours-list li.is-today {
+  border-color: var(--yellow);
+  background: rgba(255,200,0,.08);
+  box-shadow: inset 4px 0 0 var(--yellow);
+}
 .hours-list .h-day { color: var(--white); text-transform: uppercase; letter-spacing: .06em; font-size: .92rem; }
+.hours-list .is-today .h-day::after {
+  content: '';
+  display: inline-block; width: 8px; height: 8px;
+  background: var(--yellow); border-radius: 50%;
+  margin-left: 8px; vertical-align: .08em;
+}
 .hours-list .h-time { color: var(--yellow); font-family: var(--font-display); letter-spacing: .06em; }
 
 .howto-list { display: grid; gap: 14px; counter-reset: step; }
