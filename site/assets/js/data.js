@@ -47,16 +47,10 @@ window.DR_DATA = {
 
   gallery: [
     { src: "assets/img/food/food-01-grid.webp", alt: "Don Ramon Jetfuel dish" },
-    { src: "assets/img/food/food-02-grid.webp", alt: "Don Ramon Jetfuel dish" },
     { src: "assets/img/food/food-03-grid.webp", alt: "Don Ramon Jetfuel dish" },
     { src: "assets/img/food/food-04-grid.webp", alt: "Don Ramon Jetfuel dish" },
-    { src: "assets/img/food/food-05-grid.webp", alt: "Don Ramon Jetfuel dish" },
-    { src: "assets/img/food/food-06-grid.webp", alt: "Grilled food with fries" },
-    { src: "assets/img/food/food-07-grid.webp", alt: "Don Ramon Jetfuel dish" },
     { src: "assets/img/food/food-08-grid.webp", alt: "Don Ramon Jetfuel dish" },
     { src: "assets/img/food/food-09-grid.webp", alt: "Don Ramon Jetfuel dish" },
-    { src: "assets/img/food/food-10-grid.webp", alt: "Don Ramon Jetfuel dish" },
-    { src: "assets/img/food/food-11-grid.webp", alt: "Grill and preparation" },
     { src: "assets/img/food/food-12-grid.webp", alt: "Don Ramon Jetfuel dish" }
   ],
 
@@ -64,6 +58,7 @@ window.DR_DATA = {
     {
       id: "donramontje",
       label: { en: "DON RAMONTJE", es: "DON RAMONTJE" },
+      kicker: { en: "THE SIGNATURE", es: "EL ESTRELLA" },
       note: {
         en: "Served with French fries, green salad & macaroni salad.",
         es: "Servido con papas fritas, ensalada verde y ensalada de macarrones."
@@ -78,6 +73,7 @@ window.DR_DATA = {
     {
       id: "kapsalon",
       label: { en: "KAPSALON", es: "KAPSALON" },
+      kicker: { en: "FRIES. LOADED.", es: "PAPAS. CARGADAS." },
       note: {
         en: "French fries, mozzarella cheese, lettuce, garlic & Don Ramon house sauce.",
         es: "Papas fritas, queso mozzarella, lechuga, ajo y salsa de la casa Don Ramon."
@@ -104,6 +100,7 @@ window.DR_DATA = {
       "menu.kicker": "WHAT WE GRILL", "menu.title": "THE MENU",
       "menu.sub": "Two signature ways to get fed. Same rule for everything: no small portions.",
       "menu.more": "MORE DISHES ON INSTAGRAM",
+      "menu.themeLight": "LIGHT", "menu.themeDark": "DARK",
       "about.kicker": "FIRE & FLAVOR", "about.title": "ABOUT THE GRILL",
       "about.p1": "Don Ramon Jetfuel is a Curaçao street-food truck built on one idea: food should hit like jet fuel — hot, bold and generous. Everything is grilled to order over open fire and served the street way: fast, fresh and messy in the best way.",
       "about.p2": "No frozen corners, no sad portions. Just meat, fire, fries and sauce, made by people who love the grill as much as you'll love the food.",
@@ -134,6 +131,7 @@ window.DR_DATA = {
       "menu.kicker": "LO QUE ASAMOS", "menu.title": "EL MENÚ",
       "menu.sub": "Dos formas estrella de llenarte. Misma regla en todo: sin porciones pequeñas.",
       "menu.more": "MÁS PLATOS EN INSTAGRAM",
+      "menu.themeLight": "CLARO", "menu.themeDark": "OSCURO",
       "about.kicker": "FUEGO Y SABOR", "about.title": "SOBRE EL GRILL",
       "about.p1": "Don Ramon Jetfuel es un food truck de Curaçao construido sobre una idea: la comida debe pegar como combustible de avión — caliente, con carácter y generosa. Todo se asa al momento sobre fuego vivo y se sirve a la calle: rápido, fresco y deliciosamente cargado.",
       "about.p2": "Sin atajos congelados ni porciones tristes. Solo carne, fuego, papas y salsa, hechos por gente que ama el grill tanto como tú amarás la comida.",

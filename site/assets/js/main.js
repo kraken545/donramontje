@@ -28,6 +28,7 @@
     renderMenu();
     renderLocation();
     renderFooter();
+    applyMenuTheme(menuTheme);
     document.getElementById('menuIgLink').textContent = dict['menu.more'];
     document.getElementById('menuIgLink').innerHTML = dict['menu.more'] + ' <span aria-hidden="true">&rarr;</span>';
   }
@@ -47,15 +48,22 @@
   function renderMenu() {
     var dict = D.i18n[body.dataset.lang] || D.i18n.en;
     var panels = document.getElementById('menuPanels');
-    var activeCat = 0;
-    var activeTab = panels.querySelector('.menu-tab.active');
-    if (activeTab) activeCat = parseInt(activeTab.getAttribute('data-cat'), 10);
-
     panels.innerHTML = '';
-    D.menu.forEach(function (cat, i) {
+    D.menu.forEach(function (cat) {
       var panel = document.createElement('div');
-      panel.className = 'menu-panel' + (i === activeCat ? ' active' : '');
-      panel.setAttribute('role', 'tabpanel');
+      panel.className = 'menu-panel';
+
+      var head = document.createElement('div');
+      head.className = 'menu-cat-head';
+      var kicker = document.createElement('p');
+      kicker.className = 'menu-cat-kicker badge-bangers';
+      kicker.textContent = (cat.kicker && (cat.kicker[body.dataset.lang] || cat.kicker.en)) || cat.label.en;
+      var title = document.createElement('h3');
+      title.className = 'menu-cat-title';
+      title.textContent = cat.label[body.dataset.lang] || cat.label.en;
+      head.appendChild(kicker);
+      head.appendChild(title);
+      panel.appendChild(head);
 
       var note = document.createElement('p');
       note.className = 'menu-note';
@@ -66,20 +74,21 @@
       list.className = 'menu-list';
       cat.items.forEach(function (item) {
         var row = document.createElement('div');
-        row.className = 'menu-item';
+        row.className = 'menu-row';
 
-        var left = document.createElement('div');
-        var name = document.createElement('div');
-        name.className = 'menu-item-name';
+        var top = document.createElement('div');
+        top.className = 'menu-row-top';
+
+        var name = document.createElement('span');
+        name.className = 'menu-row-name';
         name.textContent = item.name[body.dataset.lang] || item.name.en;
-        var desc = document.createElement('div');
-        desc.className = 'menu-item-desc';
-        desc.textContent = (item.desc && (item.desc[body.dataset.lang] || item.desc.en)) || '';
-        left.appendChild(name);
-        left.appendChild(desc);
 
-        var price = document.createElement('div');
-        price.className = 'menu-item-price';
+        var dots = document.createElement('span');
+        dots.className = 'menu-row-dots';
+        dots.setAttribute('aria-hidden', 'true');
+
+        var price = document.createElement('span');
+        price.className = 'menu-row-price';
         var val = item.price[currency];
         price.textContent = currency === 'usd' ? ('$' + val) : String(val);
         var curLabel = document.createElement('span');
@@ -87,29 +96,23 @@
         curLabel.textContent = currency.toUpperCase();
         price.appendChild(curLabel);
 
-        row.appendChild(left);
-        row.appendChild(price);
+        top.appendChild(name);
+        top.appendChild(dots);
+        top.appendChild(price);
+        row.appendChild(top);
+
+        if (item.desc) {
+          var desc = document.createElement('p');
+          desc.className = 'menu-row-desc';
+          desc.textContent = item.desc[body.dataset.lang] || item.desc.en;
+          row.appendChild(desc);
+        }
         list.appendChild(row);
       });
       panel.appendChild(list);
       panels.appendChild(panel);
     });
   }
-
-  document.querySelectorAll('.menu-tab').forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      document.querySelectorAll('.menu-tab').forEach(function (t) {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
-      });
-      tab.classList.add('active');
-      tab.setAttribute('aria-selected', 'true');
-      var idx = tab.getAttribute('data-cat');
-      document.querySelectorAll('.menu-panel').forEach(function (p, i) {
-        p.classList.toggle('active', String(i) === idx);
-      });
-    });
-  });
 
   document.querySelectorAll('.currency-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -120,10 +123,37 @@
       renderMenu();
     });
   });
-  document.querySelector('.currency-btn[data-cur="' + currency + '"]').classList.add('active');
-  document.querySelectorAll('.currency-btn').forEach(function (b) { b.classList.remove('active'); });
   var savedCur = document.querySelector('.currency-btn[data-cur="' + currency + '"]');
   if (savedCur) savedCur.classList.add('active');
+
+  /* ---------- tema claro/oscuro (solo sección menú) ---------- */
+  var MENU_THEME_KEY = 'dr-menu-theme';
+  var menuSection = document.getElementById('menu');
+  var menuTheme = 'dark';
+  try { menuTheme = localStorage.getItem(MENU_THEME_KEY) || 'dark'; } catch (e) {}
+
+  function applyMenuTheme(t) {
+    menuTheme = t;
+    menuSection.setAttribute('data-theme', t);
+    var dict = D.i18n[body.dataset.lang] || D.i18n.en;
+    var btn = document.getElementById('menuThemeToggle');
+    var icon = btn.querySelector('.theme-icon');
+    var label = btn.querySelector('.theme-label');
+    if (t === 'light') {
+      icon.textContent = '\u263E';
+      label.textContent = dict['menu.themeDark'];
+      btn.setAttribute('aria-pressed', 'true');
+    } else {
+      icon.textContent = '\u2600';
+      label.textContent = dict['menu.themeLight'];
+      btn.setAttribute('aria-pressed', 'false');
+    }
+    try { localStorage.setItem(MENU_THEME_KEY, t); } catch (e) {}
+  }
+
+  document.getElementById('menuThemeToggle').addEventListener('click', function () {
+    applyMenuTheme(menuTheme === 'light' ? 'dark' : 'light');
+  });
 
   /* ---------- ubicación / horarios ---------- */
   function renderLocation() {

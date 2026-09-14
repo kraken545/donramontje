@@ -49,23 +49,33 @@ if (!EXE) { console.error('Chromium no encontrado. Define CHROME_BIN o instala p
 
   // 4. Currency toggle -> XCG
   await page.click('.currency-btn[data-cur="xcg"]');
-  const price = await page.evaluate(() => document.querySelector('.menu-item-price').textContent.trim());
+  const price = await page.evaluate(() => document.querySelector('.menu-row-price').textContent.trim());
   console.log('toggle moneda XCG:', price.includes('XCG') ? 'OK' : 'FALLA', '| precio:', price);
 
-  // 5. Menu tab KAPSALON (centrar elemento para evitar sticky bar)
+  // 5. Menú: dos paneles lado a lado renderizados
+  const panelCount = await page.evaluate(() => document.querySelectorAll('.menu-panel').length);
+  const rowCount = await page.evaluate(() => document.querySelectorAll('.menu-row').length);
+  console.log('menú 2 paneles:', panelCount === 2 ? 'OK' : 'FALLA', '| filas:', rowCount);
+
+  // 6. Toggle claro/oscuro solo en sección menú
   await page.evaluate(() => {
-    const t = document.querySelector('.menu-tab[data-cat="1"]');
+    const t = document.getElementById('menuThemeToggle');
     window.scrollTo(0, t.getBoundingClientRect().top + window.scrollY - 300);
   });
   await page.waitForTimeout(300);
-  await page.click('.menu-tab[data-cat="1"]');
-  const panelActive = await page.evaluate(() => {
-    const p = document.querySelectorAll('.menu-panel')[1];
-    return p.classList.contains('active');
-  });
-  console.log('tab KAPSALON:', panelActive ? 'OK' : 'FALLA');
+  await page.click('#menuThemeToggle');
+  const theme = await page.evaluate(() => ({
+    menu: document.getElementById('menu').getAttribute('data-theme'),
+    bodyBg: getComputedStyle(document.body).backgroundColor,
+    menuBg: getComputedStyle(document.getElementById('menu')).backgroundColor,
+    stored: localStorage.getItem('dr-menu-theme')
+  }));
+  console.log('toggle tema menú:', theme.menu === 'light' ? 'OK' : 'FALLA', '| guardado:', theme.stored, '| resto página intacto:', theme.bodyBg === 'rgb(11, 11, 11)' ? 'OK' : 'FALLA');
+  await page.click('#menuThemeToggle');
+  const backDark = await page.evaluate(() => document.getElementById('menu').getAttribute('data-theme'));
+  console.log('toggle vuelve a oscuro:', backDark === 'dark' ? 'OK' : 'FALLA');
 
-  // 6. Lightbox opens
+  // 7. Lightbox abre
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
   await page.waitForTimeout(200);
   await page.click('.gallery-item');

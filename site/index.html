@@ -93,7 +93,7 @@
     </div>
   </div>
 
-  <section class="section menu-section" id="menu">
+  <section class="section menu-section" id="menu" data-theme="dark">
     <div class="container">
       <header class="section-head">
         <p class="section-kicker badge-bangers" data-i18n="menu.kicker">WHAT WE GRILL</p>
@@ -101,14 +101,15 @@
         <p class="section-sub" data-i18n="menu.sub">Two signature ways to get fed. Same rule for everything: <strong>no small portions.</strong></p>
       </header>
 
-      <div class="currency-toggle" role="group" aria-label="Currency">
-        <button type="button" class="currency-btn active" data-cur="usd">USD</button>
-        <button type="button" class="currency-btn" data-cur="xcg">XCG</button>
-      </div>
-
-      <div class="menu-tabs" role="tablist" aria-label="Menu categories">
-        <button class="menu-tab active" type="button" role="tab" aria-selected="true" data-cat="0">DON RAMONTJE</button>
-        <button class="menu-tab" type="button" role="tab" aria-selected="false" data-cat="1">KAPSALON</button>
+      <div class="menu-toolbar">
+        <div class="currency-toggle" role="group" aria-label="Currency">
+          <button type="button" class="currency-btn" data-cur="usd">USD</button>
+          <button type="button" class="currency-btn" data-cur="xcg">XCG</button>
+        </div>
+        <button class="menu-theme-toggle" id="menuThemeToggle" type="button" aria-pressed="false">
+          <span class="theme-icon" aria-hidden="true">&#9728;</span>
+          <span class="theme-label" data-i18n="menu.themeLight">LIGHT</span>
+        </button>
       </div>
 
       <div id="menuPanels" class="menu-panels"></div>
