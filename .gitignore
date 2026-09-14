@@ -1,0 +1,7 @@
+.DS_Store
+Thumbs.db
+node_modules/
+*.log
+
+# iconos de UI descargados de Instagram (no son assets de marca)
+img/download*.svg
